@@ -1,0 +1,11 @@
+apiVersion: openliberty.io/v1beta1
+kind: OpenLibertyApplication
+metadata:
+  name: elk-integration-demo
+spec:
+  replicas: 1
+  applicationImage: 'docker.io/majguo/elk-integration:1.0'
+  expose: true
+  storage:
+    size: 2Gi
+    mountPath: "/logs"
