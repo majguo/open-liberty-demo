@@ -5,6 +5,8 @@ import org.eclipse.microprofile.metrics.MetricUnits;
 import org.eclipse.microprofile.metrics.annotation.Gauge;
 import org.eclipse.microprofile.metrics.annotation.Metric;
 import org.eclipse.microprofile.metrics.annotation.Timed;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -16,6 +18,8 @@ import java.util.Random;
 @ApplicationScoped //Required for @Gauge
 public class MetricController {
 
+	private final Logger log = LoggerFactory.getLogger(getClass());
+	
     @Inject
     @Metric(name = "endpoint_counter")
     private Counter counter;
@@ -30,9 +34,11 @@ public class MetricController {
             Thread.sleep(wait);
         } catch (InterruptedException e) {
             // Demo
+        	log.error("Exception occured in timedRequest() method: {}", e.getLocalizedMessage());
             e.printStackTrace();
         }
 
+        log.info("Request is used in statistics, check with the Metrics call.");
         return "Request is used in statistics, check with the Metrics call.";
     }
 
@@ -41,6 +47,8 @@ public class MetricController {
     @GET
     public String doIncrement() {
         counter.inc();
+        
+        log.info("The counter is incremented and the current value is: {}", counter.getCount());
         return String.valueOf(counter.getCount());
     }
 
