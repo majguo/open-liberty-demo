@@ -1,4 +1,4 @@
-# Description
+# Integrate ELK for application running on Open Liberty Server
 
 ## Introduction
 
