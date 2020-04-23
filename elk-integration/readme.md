@@ -16,7 +16,7 @@
  $ docker login
  $ docker push <docker-hub-account-name>/<image-name>:<tag>
  ```
- ### Deploy and run containerized applications on ARO
+ ### Deploy and run Open Liberty Application on ARO
 - Create `secret` "elastic-cloud-secret" from ARO UI console
   - Replace placeholder value of `elastic.cloud.id` & `elastic.cloud.auth` from [elastic-cloud-secret.yaml](https://github.com/majguo/open-liberty-demo/blob/master/elk-integration/deployment/elastic-cloud-secret.yaml) with valid values
 - Create `configmap` "filebeat-config" with [filebeat-elastic-hosted.yaml](https://github.com/majguo/open-liberty-demo/blob/master/elk-integration/deployment/filebeat-elastic-hosted.yaml) from ARO UI console
