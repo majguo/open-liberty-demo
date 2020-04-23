@@ -1,6 +1,6 @@
 # Integrate ELK for application running on Open Liberty Server
 
-## Run it on ARO (Azure Red Hat OpenShift) 4.3 cluster
+## How to run on Azure Red Hat OpenShift (ARO) 4.3 cluster
 ### Prerequisites
 - Register an [Azure subscription](https://azure.microsoft.com/en-us/)
 - Install [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest)
