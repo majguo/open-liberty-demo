@@ -1,4 +1,4 @@
-# Integrate ELK for application running on Open Liberty Server
+# Integrate Elastic Stack for application running on Open Liberty Server
 
 ## How to run on Azure Red Hat OpenShift (ARO) 4.3 cluster
 ### Prerequisites
