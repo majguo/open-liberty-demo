@@ -12,8 +12,6 @@
     <webApplication location="${project.name}.war" contextRoot="/" />
     <mpMetrics authentication="false"/>
 
-    <logging messageFormat="json" messageLogLevel="info" messageSource="message,trace,accessLog,ffdc,audit" />
-
     <!-- This is the keystore that will be used by SSL and by JWT. -->
     <keyStore id="defaultKeyStore" location="public.jks" type="JKS" password="atbash" />
 
