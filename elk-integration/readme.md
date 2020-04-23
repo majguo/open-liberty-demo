@@ -18,7 +18,7 @@
  ```
  ### Deploy and run containerized applications on ARO
 - Create `secret` "elastic-cloud-secret" from ARO UI console
-  - Replace placeholder value of `elastic.cloud.id` & `elastic.cloud.auth` from `elastic-cloud-secret.yaml` with valid values
+  - Replace placeholder value of `elastic.cloud.id` & `elastic.cloud.auth` from [elastic-cloud-secret.yaml](https://github.com/majguo/open-liberty-demo/blob/master/elk-integration/deployment/elastic-cloud-secret.yaml) with valid values
 - Create `configmap` "filebeat-config" from ARO UI console
 - Create `OpenShiftApplication` "elk-integration-demo" from Open Liberty Operator in ARO UI console
-  - Replace placeholder value of `applicationImage` from `openlibertyapplication.yaml` with valid values
+  - Replace placeholder value of `applicationImage` from [openlibertyapplication.yaml](https://github.com/majguo/open-liberty-demo/blob/master/elk-integration/deployment/openlibertyapplication.yaml) with valid values
