@@ -4,9 +4,10 @@
 ### Prerequisites
 - Register an [Azure subscription](https://azure.microsoft.com/en-us/)
 - Install [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest)
-- Install Maven
 - Follow this [guide](https://docs.microsoft.com/en-us/azure/openshift/howto-using-azure-redhat-openshift) to create an ARO 4.3 cluster
 - Install Open Liberty Oprator from OperatorHub of ARO UI console
+- Setup an [Elasticsearch Service deployed on Azure](https://www.elastic.co/azure)
+- Install Maven
  ### Build & push image to Docker Hub
  ```
  $ mv clean package
@@ -17,5 +18,7 @@
  ```
  ### Deploy and run containerized applications on ARO
 - Create `secret` "elastic-cloud-secret" from ARO UI console
+  - Replace placeholder value of `elastic.cloud.id` & `elastic.cloud.auth` from `elastic-cloud-secret.yaml` with valid values
 - Create `configmap` "filebeat-config" from ARO UI console
-- Create `OpenShiftApplication` "elk-integration-demo" from ARO UI console
+- Create `OpenShiftApplication` "elk-integration-demo" from Open Liberty Operator in ARO UI console
+  - Replace placeholder value of `applicationImage` from `openlibertyapplication.yaml` with valid values
