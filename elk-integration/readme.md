@@ -10,15 +10,9 @@
 - Install Maven
  ### Build & push image to Docker Hub
  ```
- $ mv clean package
- $ docker build -t <image-name>:<tag>
- $ docker tag <image-name>:<tag> <docker-hub-account-name>/<image-name>:<tag>
- $ docker login
- $ docker push <docker-hub-account-name>/<image-name>:<tag>
+ $ ./build.sh <docker-hub-account-name> <image-name> <tag>
  ```
  ### Deploy and run Open Liberty Application on ARO
-- Create `secret` "elastic-cloud-secret" from ARO UI console
-  - Replace placeholder value of `elastic.cloud.id` & `elastic.cloud.auth` from [elastic-cloud-secret.yaml](https://github.com/majguo/open-liberty-demo/blob/master/elk-integration/deployment/elastic-cloud-secret.yaml) with valid values
-- Create `configmap` "filebeat-config" with [filebeat-elastic-hosted.yaml](https://github.com/majguo/open-liberty-demo/blob/master/elk-integration/deployment/filebeat-elastic-hosted.yaml) from ARO UI console
-- Create `OpenShiftApplication` "elk-integration-demo" from Open Liberty Operator in ARO UI console
-  - Replace placeholder value of `applicationImage` from [openlibertyapplication.yaml](https://github.com/majguo/open-liberty-demo/blob/master/elk-integration/deployment/openlibertyapplication.yaml) with valid values
+ ```
+ $ ./deploy.sh <docker-hub-account-name>/<image-name>:<tag> <elastic-cloud-id> <elastic-cloud-user> <elastic-cloud-password>
+ ```

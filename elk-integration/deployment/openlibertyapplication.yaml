@@ -4,8 +4,9 @@ metadata:
   name: elk-integration-demo
 spec:
   replicas: 1
-  applicationImage: <SPECIFY_APPLICATION_IMAGE>
+  applicationImage: ${APPLICATION_IMAGE}
   expose: true
+  serviceAccountName: ${SERVICE_ACCOUNT_NAME}
   volumeMounts:
   - name: logs-volume
     mountPath: /logs
