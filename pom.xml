@@ -13,6 +13,7 @@
 
 	<modules>
 		<module>elk-integration</module>
+		<module>aad-oidc-integration</module>
 	</modules>
 
 </project>
