@@ -19,7 +19,7 @@ This demo project provides an example on how to secure your application which is
 - Install JDK, e.g., [Zulu OpenJDK for Azure](https://docs.microsoft.com/en-us/java/azure/jdk/java-jdk-install?view=azure-java-stable) or [OpenJDK](https://openjdk.java.net/install/)
 - Download [Maven](https://maven.apache.org/download.cgi)
 
-## Setup your Azure Active Directory
+## Setup Azure Active Directory
 - [Create a new Azure AD tenant](https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-create-new-tenant#create-a-new-azure-ad-tenant) if not existing, log down Directory (tenant) ID
 - [Create Azure AD users](https://docs.microsoft.com/en-us/azure/openshift/howto-aad-app-configuration#create-a-new-azure-active-directory-user) if not existing, log down their emial addresses & passwords
 - [Create Azure AD security groups](https://docs.microsoft.com/en-us/azure/openshift/howto-aad-app-configuration#create-an-azure-ad-security-group) "admin" & "users" if not existing, add created users as group members, log down group IDs 
@@ -51,5 +51,5 @@ This demo project provides an example on how to secure your application which is
 - Build application image from WebSphere Liberty: `docker build -t <image-name>:<tag> -f Dockerfile-wlp .`
 - Build application image from Open Liberty: `docker build -t <image-name>:<tag> -f Dockerfile .`
  
-## Run containered application
+## Run containerized application
 - Run `docker run --name <container-name> -p <port>:<https-port> -d <image-name>:<tag>`
