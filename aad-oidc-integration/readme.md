@@ -16,9 +16,7 @@ This demo project provides an example on how to secure your application which is
 ## Prerequisites
 - Register an [Azure subscription](https://azure.microsoft.com/en-us/)
 - Install [Docker Desktop](https://www.docker.com/products/docker-desktop)
-- Install JDK
-  - [Zulu OpenJDK for Azure](https://docs.microsoft.com/en-us/java/azure/jdk/java-jdk-install?view=azure-java-stable)
-  - or [OpenJDK](https://openjdk.java.net/install/)
+- Install JDK, e.g., [Zulu OpenJDK for Azure](https://docs.microsoft.com/en-us/java/azure/jdk/java-jdk-install?view=azure-java-stable) or [OpenJDK](https://openjdk.java.net/install/)
 - Download [Maven](https://maven.apache.org/download.cgi)
 
 ## Setup your Azure Active Directory
