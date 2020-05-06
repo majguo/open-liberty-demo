@@ -1,4 +1,4 @@
-# Secure your Open Liberty/WebSphere Liberty Application with Azure Active Directory OpenID Connect
+# Secure Liberty Application with Azure Active Directory OpenID Connect
 
 ## Introduction
 This demo project provides an example on how to secure your application which is running on Open Liberty / WebSphere Liberty server by using Azure Active Directory OpenID Connect, including:
@@ -6,6 +6,10 @@ This demo project provides an example on how to secure your application which is
   - Authenticated with users registered in Azure Active Directory
   - Authorized with security groups registered in Azure Active Directory
 - Single-Sign-Out
+
+### References
+- [Securing Open Liberty apps and microservices with MicroProfile JWT and Social Media login](https://openliberty.io/blog/2019/08/29/securing-microservices-social-login-jwt.html)
+- [Configuring an OpenID Connect Client in Liberty](https://www.ibm.com/support/knowledgecenter/SSEQTP_liberty/com.ibm.websphere.wlp.doc/ae/twlp_config_oidc_rp.html)
 
 ## Prerequisites
 - Register an [Azure subscription](https://azure.microsoft.com/en-us/)
