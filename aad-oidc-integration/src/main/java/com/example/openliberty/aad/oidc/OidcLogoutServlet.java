@@ -13,16 +13,16 @@ import javax.servlet.http.HttpServletResponse;
 @ServletSecurity(value = @HttpConstraint(rolesAllowed= {"authenticated"}))
 public class OidcLogoutServlet extends HttpServlet {
 
-	private static final long serialVersionUID = 1L;
-	
-	public OidcLogoutServlet() {
+    private static final long serialVersionUID = 1L;
+    
+    public OidcLogoutServlet() {
         super();
     }
-	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getSession().invalidate();
         request.logout();
-		response.sendRedirect("/");
+        response.sendRedirect("/");
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
