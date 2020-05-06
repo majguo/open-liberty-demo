@@ -25,9 +25,9 @@
     <client.id>SPECIFY_YOUR_CLIENT_ID</client.id>
     <client.secret>SPECIFY_YOUR_CLIENT_SECRET</client.secret>
     <tenant.id>SPECIFY_YOUR_TENANT_ID</tenant.id>
-    <logout.redirect.url.https>SPECIFY_YOUR_LOGOUT_REDIRECT_URL_HTTPS</logout.redirect.url.https>
     <admin.group.id>SPECIFY_YOUR_ADMIN_GROUP_ID</admin.group.id>
     <users.group.id>SPECIFY_YOUR_USERS_GROUP_ID</users.group.id>
+    <logout.redirect.url.https>SPECIFY_YOUR_LOGOUT_REDIRECT_URL_HTTPS</logout.redirect.url.https>
   </properties>
   
   <dependencies>
@@ -105,9 +105,9 @@
                 <client.id>${client.id}</client.id>
                 <client.secret>${client.secret}</client.secret>
                 <tenant.id>${tenant.id}</tenant.id>
-                <logout.redirect.url.https>${logout.redirect.url.https}</logout.redirect.url.https>
                 <admin.group.id>${admin.group.id}</admin.group.id>
                 <users.group.id>${users.group.id}</users.group.id>
+                <logout.redirect.url.https>${logout.redirect.url.https}</logout.redirect.url.https>
                 <com.ibm.ws.logging.console.format>basic</com.ibm.ws.logging.console.format>
                 <com.ibm.ws.logging.console.source>message,trace,accessLog,ffdc,audit</com.ibm.ws.logging.console.source>
                 <com.ibm.ws.logging.console.log.level>info</com.ibm.ws.logging.console.log.level>
