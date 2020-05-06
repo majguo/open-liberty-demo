@@ -6,7 +6,7 @@ This demo project provides an example on how to secure your application which is
   - Authenticated with users registered in Azure Active Directory
   - Authorized with security groups registered in Azure Active Directory
 - Sign out
-  - Sign out from applicatoin itself only
+  - Sign out from application itself only
   - Sign out from both application & Azure AD (Single-Sign-Out) 
 
 ### References
