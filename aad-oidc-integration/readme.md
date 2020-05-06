@@ -14,6 +14,9 @@ This demo project provides an example on how to secure your application which is
 ## Prerequisites
 - Register an [Azure subscription](https://azure.microsoft.com/en-us/)
 - Install [Docker Desktop](https://www.docker.com/products/docker-desktop)
+- Install JDK
+  - [Zulu OpenJDK for Azure](https://docs.microsoft.com/en-us/java/azure/jdk/java-jdk-install?view=azure-java-stable)
+  - or [OpenJDK](https://openjdk.java.net/install/)
 - Download [Maven](https://maven.apache.org/download.cgi)
 
 ## Setup your Azure Active Directory
@@ -32,18 +35,16 @@ This demo project provides an example on how to secure your application which is
 - Clone [this repo](https://github.com/majguo/open-liberty-demo)
 - Change directory to `<path-to-repo>/aad-oidc-integration`
 - Replace the placeholders for the following properties in `pom.xml` with valid values:
-  ```
-    <http.port>SPECIFY_YOUR_HTTP_PORT</http.port>
-    <https.port>SPECIFY_YOUR_HTTPS_PORT</https.port>
-    <default.keystore.pass>SPECIFY_YOUR_DEFAULT_KEYSTORE_PASS</default.keystore.pass>
-    <java.truststore.pass>SPECIFY_YOUR_JAVA_TRUSTSTORE_PASS</java.truststore.pass>
-    <client.id>SPECIFY_YOUR_CLIENT_ID</client.id>
-    <client.secret>SPECIFY_YOUR_CLIENT_SECRET</client.secret>
-    <tenant.id>SPECIFY_YOUR_TENANT_ID</tenant.id>
-    <logout.redirect.url.https>SPECIFY_YOUR_LOGOUT_REDIRECT_URL_HTTPS</logout.redirect.url.https>
-    <admin.group.id>SPECIFY_YOUR_ADMIN_GROUP_ID</admin.group.id>
-    <users.group.id>SPECIFY_YOUR_USERS_GROUP_ID</users.group.id>
-  ```
+  - `http.port`: specify http port of server, e.g., "9080"
+  - `https.port`: specify https port of server, e.g., "9543"
+  - `default.keystore.pass`: specify password for default keystore, which will be created by Liberty server
+  - `java.truststore.pass`: password for java default trust store, located in `${JAVA_HOME}/lib/security/cacerts`, the default is `changeit`
+  - `client.id`: the one you logged down in previous step
+  - `client.secret`: the one you logged down in previous step
+  - `tenant.id`: the one you logged down in previous step
+  - `admin.group.id`: the one you logged down in previous step
+  - `users.group.id`: the one you logged down in previous step
+  - `logout.redirect.url.https`: the one you filled in for <b>Logout URL</b> in previous step
 - Run `mvn clean package`
 
 ## Build image
