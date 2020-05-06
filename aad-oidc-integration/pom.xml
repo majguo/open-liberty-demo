@@ -18,16 +18,16 @@
     <maven.compiler.source>1.8</maven.compiler.source>
     <openliberty.version>[19.0.0.9,)</openliberty.version>
     <final.name>aad-oidc-integration</final.name>
-    <http.port>SPECIY_YOUR_HTTP_PORT</http.port>
-    <https.port>SPECIY_YOUR_HTTPS_PORT</https.port>
-    <default.keystore.pass>SPECIY_YOUR_DEFAULT_KEYSTORE_PASS</default.keystore.pass>
-    <java.truststore.pass>SPECIY_YOUR_JAVA_TRUSTSTORE_PASS</java.truststore.pass>
-    <client.id>SPECIY_YOUR_CLIENT_ID</client.id>
-    <client.secret>SPECIY_YOUR_CLIENT_SECRET</client.secret>
-    <tenant.id>SPECIY_YOUR_TENANT_ID</tenant.id>
+    <http.port>SPECIFY_YOUR_HTTP_PORT</http.port>
+    <https.port>SPECIFY_YOUR_HTTPS_PORT</https.port>
+    <default.keystore.pass>SPECIFY_YOUR_DEFAULT_KEYSTORE_PASS</default.keystore.pass>
+    <java.truststore.pass>SPECIFY_YOUR_JAVA_TRUSTSTORE_PASS</java.truststore.pass>
+    <client.id>SPECIFY_YOUR_CLIENT_ID</client.id>
+    <client.secret>SPECIFY_YOUR_CLIENT_SECRET</client.secret>
+    <tenant.id>SPECIFY_YOUR_TENANT_ID</tenant.id>
     <logout.redirect.url.https>SPECIFY_YOUR_LOGOUT_REDIRECT_URL_HTTPS</logout.redirect.url.https>
-    <admin.group.id>SPECIY_YOUR_ADMIN_GROUP_ID</admin.group.id>
-    <users.group.id>SPECIY_YOUR_USERS_GROUP_ID</users.group.id>
+    <admin.group.id>SPECIFY_YOUR_ADMIN_GROUP_ID</admin.group.id>
+    <users.group.id>SPECIFY_YOUR_USERS_GROUP_ID</users.group.id>
   </properties>
   
   <dependencies>
