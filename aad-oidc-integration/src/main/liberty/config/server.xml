@@ -11,13 +11,12 @@
 
     <httpEndpoint id="defaultHttpEndpoint"
                   httpPort="9080"
-                  httpsPort="9443"/>
+                  httpsPort="9543"/>
     
-    <openidConnectClient id="${client.id}"
+    <openidConnectClient id="liberty-aad-oidc-sample"
                          clientId="${client.id}"
                          clientSecret="${client.secret}"
                          discoveryEndpointUrl="https://login.microsoftonline.com/${tenant.id}/v2.0/.well-known/openid-configuration"
-                         issuerIdentifier="https://login.microsoftonline.com/{tenant.id}/v2.0"
                          signatureAlgorithm="RS256"
                          userIdentityToCreateSubject="upn"
                          groupIdentifier="groups" />
