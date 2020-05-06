@@ -18,14 +18,16 @@
     <maven.compiler.source>1.8</maven.compiler.source>
     <openliberty.version>[19.0.0.9,)</openliberty.version>
     <final.name>aad-oidc-integration</final.name>
+    <http.port>SPECIY_YOUR_HTTP_PORT</http.port>
+    <https.port>SPECIY_YOUR_HTTPS_PORT</https.port>
+    <default.keystore.pass>SPECIY_YOUR_DEFAULT_KEYSTORE_PASS</default.keystore.pass>
+    <java.truststore.pass>SPECIY_YOUR_JAVA_TRUSTSTORE_PASS</java.truststore.pass>
     <client.id>SPECIY_YOUR_CLIENT_ID</client.id>
     <client.secret>SPECIY_YOUR_CLIENT_SECRET</client.secret>
     <tenant.id>SPECIY_YOUR_TENANT_ID</tenant.id>
     <logout.redirect.url.https>SPECIFY_YOUR_LOGOUT_REDIRECT_URL_HTTPS</logout.redirect.url.https>
     <admin.group.id>SPECIY_YOUR_ADMIN_GROUP_ID</admin.group.id>
     <users.group.id>SPECIY_YOUR_USERS_GROUP_ID</users.group.id>
-    <keystore.name>SPECIY_YOUR_KEYSTORE_NAME</keystore.name>
-    <keystore.pass>SPECIY_YOUR_KEYSTORE_PASSWORD</keystore.pass>
   </properties>
   
   <dependencies>
@@ -96,14 +98,16 @@
               <serverName>${final.name}</serverName>
               <bootstrapProperties>
                 <project.name>${final.name}</project.name>
+                <http.port>${http.port}</http.port>
+                <https.port>${https.port}</https.port>
+                <default.keystore.pass>${default.keystore.pass}</default.keystore.pass>
+                <java.truststore.pass>${java.truststore.pass}</java.truststore.pass>
                 <client.id>${client.id}</client.id>
                 <client.secret>${client.secret}</client.secret>
                 <tenant.id>${tenant.id}</tenant.id>
                 <logout.redirect.url.https>${logout.redirect.url.https}</logout.redirect.url.https>
                 <admin.group.id>${admin.group.id}</admin.group.id>
                 <users.group.id>${users.group.id}</users.group.id>
-                <keystore.name>${keystore.name}</keystore.name>
-                <keystore.pass>${keystore.pass}</keystore.pass>
                 <com.ibm.ws.logging.console.format>basic</com.ibm.ws.logging.console.format>
                 <com.ibm.ws.logging.console.source>message,trace,accessLog,ffdc,audit</com.ibm.ws.logging.console.source>
                 <com.ibm.ws.logging.console.log.level>info</com.ibm.ws.logging.console.log.level>

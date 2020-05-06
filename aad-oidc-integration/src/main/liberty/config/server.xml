@@ -11,8 +11,8 @@
 
     <httpEndpoint id="defaultHttpEndpoint"
                   host="*"
-                  httpPort="9080"
-                  httpsPort="9543"/>
+                  httpPort="${http.port}"
+                  httpsPort="${https.port}"/>
     
     <openidConnectClient id="liberty-aad-oidc-sample"
                          clientId="${client.id}"
@@ -30,6 +30,8 @@
         </application-bnd>
     </webApplication>
 
-    <!-- This is the keystore that will be used by SSL and by JWT. -->
-    <keyStore id="defaultKeyStore" location="${keystore.name}" password="${keystore.pass}" />
+    <!-- Import default Java trust store for root certs -->
+    <ssl id="defaultSSLConfig" keyStoreRef="defaultKeyStore" trustStoreRef="defaultTrustStore" />
+    <keyStore id="defaultKeyStore" type="JKS" password="${default.keystore.pass}" />
+    <keyStore id="defaultTrustStore" location="${JAVA_HOME}/lib/security/cacerts" type="JKS" password="${java.truststore.pass}" />
 </server>
