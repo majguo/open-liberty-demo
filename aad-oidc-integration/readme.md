@@ -5,7 +5,9 @@ This demo project provides an example on how to secure your application which is
 - Single-Sign-On
   - Authenticated with users registered in Azure Active Directory
   - Authorized with security groups registered in Azure Active Directory
-- Single-Sign-Out
+- Sign out
+  - Sign out from applicatoin itself only
+  - Sign out from both application & Azure AD (Single-Sign-Out) 
 
 ### References
 - [Securing Open Liberty apps and microservices with MicroProfile JWT and Social Media login](https://openliberty.io/blog/2019/08/29/securing-microservices-social-login-jwt.html)
