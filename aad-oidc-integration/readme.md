@@ -47,9 +47,17 @@ This demo project provides an example on how to secure your application which is
   - `logout.redirect.url.https`: the one you filled in for <b>Logout URL</b> in previous step
 - Run `mvn clean package`
 
+## Run in local
+- Run in development mode: `mvn liberty:dev`
+- Run jar package: `java -jar target/aad-oidc-integration.jar`
+
 ## Build image
 - Build application image from WebSphere Liberty: `docker build -t <image-name>:<tag> -f Dockerfile-wlp .`
 - Build application image from Open Liberty: `docker build -t <image-name>:<tag> -f Dockerfile .`
  
 ## Run containerized application
 - Run `docker run --name <container-name> -p <port>:<https-port> -d <image-name>:<tag>`
+
+## Open questions
+- `logout.redirect.url.https` is better configured during runtime phase instead of building phase
+- Azure AD OpenID Connect requires <b>Redirect URI</b> specified in app registration matches with the one passed by OpenID Connect client when issuing request to authorization endpoint of Azure AD as a request parameter `redirect_uri`, which may have issue when OpenID Connect client runs behind a proxy/route (e.g., LoadBalancer or Route in Kubernetes/OpenShift platform). More testing/investigation is required.
