@@ -1,12 +1,53 @@
 apiVersion: openliberty.io/v1beta1
 kind: OpenLibertyApplication
 metadata:
-  name: elk-integration-demo
+  name: open-liberty-demo
 spec:
   replicas: 1
   applicationImage: ${APPLICATION_IMAGE}
   expose: true
   serviceAccountName: ${SERVICE_ACCOUNT_NAME}
+  env:
+  - name: KEYSTORE_NAME
+    valueFrom:
+      secretKeyRef:
+        name: keystore-secret
+        key: keystore.name
+  - name: KEYSTORE_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        name: keystore-secret
+        key: keystore.password
+  - name: POSTGRESQL_SERVER_NAME
+    valueFrom:
+      secretKeyRef:
+        name: postgresql-secret
+        key: postgresql.server.name
+  - name: POSTGRESQL_USER
+    valueFrom:
+      secretKeyRef:
+        name: postgresql-secret
+        key: postgresql.user
+  - name: POSTGRESQL_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        name: postgresql-secret
+        key: postgresql.password
+  - name: TENANT_ID
+    valueFrom:
+      secretKeyRef:
+        name: aad-oidc-secret
+        key: tenant.id
+  - name: CLIENT_ID
+    valueFrom:
+      secretKeyRef:
+        name: aad-oidc-secret
+        key: client.id
+  - name: CLIENT_SECRET
+    valueFrom:
+      secretKeyRef:
+        name: aad-oidc-secret
+        key: client.secret
   volumeMounts:
   - name: logs-volume
     mountPath: /logs
