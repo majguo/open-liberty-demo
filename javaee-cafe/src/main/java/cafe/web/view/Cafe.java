@@ -9,6 +9,7 @@ import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -79,11 +80,10 @@ public class Cafe implements Serializable {
 
 			InetAddress inetAddress = InetAddress.getByName(request.getServerName());
 
-			baseUri = FacesContext.getCurrentInstance().getExternalContext().getRequestScheme() + "://"
-					+ inetAddress.getHostName() + ":"
-					+ FacesContext.getCurrentInstance().getExternalContext().getRequestServerPort()
-					+ "/javaee-cafe/rest/coffees";
-			this.client = ClientBuilder.newBuilder().hostnameVerifier(new HostnameVerifier() {
+            ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
+            baseUri = context.getRequestScheme() + "://" + inetAddress.getHostName() + ":"
+                    + context.getRequestServerPort() + request.getContextPath() + "/rest/coffees";
+            this.client = ClientBuilder.newBuilder().hostnameVerifier(new HostnameVerifier() {
 				public boolean verify(String hostname, SSLSession session) {
 					return true;
 				}
