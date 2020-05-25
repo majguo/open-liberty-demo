@@ -28,3 +28,4 @@ target
 .settings
 *.versionsBackup
 .classpath
+*.jks
