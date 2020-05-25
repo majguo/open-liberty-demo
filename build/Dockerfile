@@ -26,4 +26,4 @@ USER 1001
 # Copy deployment artifacts.
 COPY --chown=1001:0 postgresql-42.2.4.jar /opt/ibm/wlp/usr/shared/resources/
 COPY --chown=1001:0 server.xml /config/
-COPY --chown=1001:0 ../javaee-cafe/target/javaee-cafe.war /config/apps/
+COPY --chown=1001:0 javaee-cafe.war /config/apps/
