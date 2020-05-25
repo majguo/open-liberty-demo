@@ -40,7 +40,7 @@
 	<dataSource id="JavaEECafeDB"
 		jdbcDriverRef="postgresql-driver" jndiName="jdbc/JavaEECafeDB"
 		transactional="true" type="javax.sql.ConnectionPoolDataSource">
-		<properties databaseName="postgres" portNumber="5432"
+		<properties databaseName="postgres" portNumber="5432" ssl="true"
 			serverName="${POSTGRESQL_SERVER_NAME}" user="${POSTGRESQL_USER}"
 			password="${POSTGRESQL_PASSWORD}" />
 	</dataSource>
@@ -57,7 +57,7 @@
 
     <logging messageFormat="JSON" messageSource="message,trace,accessLog,ffdc,audit" />
 
-	<webApplication id="javaee-cafe"
+	<webApplication id="javaee-cafe" contextRoot="/"
 		location="${server.config.dir}/apps/javaee-cafe.war">
 		<application-bnd>
 			<security-role name="users">
