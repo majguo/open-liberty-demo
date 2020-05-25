@@ -55,6 +55,8 @@
 			id="PostgreSQLFileset" includes="postgresql-42.2.4.jar" />
 	</library>
 
+    <logging messageFormat="JSON" messageSource="message,trace,accessLog,ffdc,audit" />
+
 	<webApplication id="javaee-cafe"
 		location="${server.config.dir}/apps/javaee-cafe.war">
 		<application-bnd>
