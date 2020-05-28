@@ -1,23 +1,35 @@
 apiVersion: openliberty.io/v1beta1
 kind: OpenLibertyApplication
 metadata:
-  name: open-liberty-demo
+  name: javaee-cafe
 spec:
   replicas: 1
   applicationImage: ${APPLICATION_IMAGE}
+  pullPolicy: Always
   expose: true
   serviceAccountName: ${SERVICE_ACCOUNT_NAME}
+  service:
+    port: 9443
+    ports:
+    - port: 9080
+      targetPort: 9080
+    certificate:
+      issuerRef:
+        name: ${CLUSTER_ISSUER_NAME}
+        kind: ClusterIssuer
+  route:
+    termination: reencrypt
+    certificate:
+      issuerRef:
+        name: ${CLUSTER_ISSUER_NAME}
+        kind: ClusterIssuer
   env:
-  - name: KEYSTORE_NAME
-    valueFrom:
-      secretKeyRef:
-        name: keystore-secret
-        key: keystore.name
-  - name: KEYSTORE_PASSWORD
-    valueFrom:
-      secretKeyRef:
-        name: keystore-secret
-        key: keystore.password
+  - name: SEC_TLS_TRUSTDEFAULTCERTS
+    value: 'true'
+  - name: SEC_IMPORT_K8S_CERTS
+    value: 'true'
+  - name: WLP_LOGGING_CONSOLE_FORMAT
+    value: SIMPLE
   - name: POSTGRESQL_SERVER_NAME
     valueFrom:
       secretKeyRef:

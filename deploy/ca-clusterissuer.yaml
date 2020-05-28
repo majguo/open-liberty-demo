@@ -1,0 +1,8 @@
+apiVersion: cert-manager.io/v1alpha2
+kind: ClusterIssuer
+metadata:
+  name: ${CLUSTER_ISSUER_NAME}
+  namespace: cert-manager
+spec:
+  ca:
+    secretName: ${CA_SECRET_NAME}
