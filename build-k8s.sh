@@ -13,7 +13,7 @@ mvn clean install --file javaee-cafe/pom.xml
 cp javaee-cafe/target/javaee-cafe.war ./build
 
 docker rmi ${imageName}
-docker build -t ${imageName} --build-arg keyStoreName=${keyStoreName} --build-arg keyStorePassword=${keyStorePassword} -f Dockerfile-k8s ./build
+docker build -t ${imageName} --build-arg keyStoreName=${keyStoreName} --build-arg keyStorePassword=${keyStorePassword} -f ./build/Dockerfile-k8s ./build
 docker rmi ${crServer}/${imageName}
 docker tag ${imageName} ${crServer}/${imageName}
 

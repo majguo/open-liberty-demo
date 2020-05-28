@@ -29,3 +29,5 @@ target
 *.versionsBackup
 .classpath
 *.jks
+
+hello-world/*
