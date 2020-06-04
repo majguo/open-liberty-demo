@@ -1,4 +1,4 @@
-# Deploy and Run Open Liberty Application on Azure Red Hat OpenShift
+# Deploy Open Liberty Application on Azure Red Hat OpenShift
 - Introduction for Open Liberty
 - Introduction for Azure Red Hat OpenShift
 - This guide is for how to deploy and run Open Liberty application on ARO
