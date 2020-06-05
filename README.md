@@ -11,7 +11,7 @@
 - Register an Azure subscription. If you don't have one, you can get one for free for one year [here](https://azure.microsoft.com/en-us/free)
 
 ## Set up Azure Red Hat OpenShift cluster
-- [Create an Azure Red Hat OpenShift 4 cluste](https://docs.microsoft.com/en-us/azure/openshift/tutorial-create-cluster)
+- [Create an Azure Red Hat OpenShift 4 cluster](https://docs.microsoft.com/en-us/azure/openshift/tutorial-create-cluster)
 - [Connect to an Azure Red Hat OpenShift 4 cluster](https://docs.microsoft.com/en-us/azure/openshift/tutorial-connect-cluster)
 - Install Open Liberty Operator
 
