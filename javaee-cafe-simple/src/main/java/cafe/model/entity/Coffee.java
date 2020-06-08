@@ -2,21 +2,13 @@ package cafe.model.entity;
 
 import java.io.Serializable;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.NamedQuery;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
-@Entity
-@NamedQuery(name = "findAllCoffees", query = "SELECT o FROM Coffee o")
 public class Coffee implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue
 	private Long id;
 	protected String name;
 	protected Double price;

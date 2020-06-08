@@ -6,7 +6,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.inject.Inject;
-import javax.persistence.PersistenceException;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -39,12 +38,7 @@ public class CafeResource {
 	@Consumes({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
 	@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })	
 	public Coffee createCoffee(Coffee coffee) {
-		try {
-			return this.cafeRepository.persistCoffee(coffee);
-		} catch (PersistenceException e) {
-			logger.log(Level.SEVERE, "Error creating coffee {0}: {1}.", new Object[] { coffee, e });
-			throw new WebApplicationException(e, Response.Status.INTERNAL_SERVER_ERROR);
-		}
+		return this.cafeRepository.persistCoffee(coffee);
 	}
 
 	@GET
