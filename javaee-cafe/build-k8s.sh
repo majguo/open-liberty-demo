@@ -9,8 +9,8 @@ keyStoreName=$3
 # Keystore password
 keyStorePassword=$4
 
-mvn clean install --file javaee-cafe/pom.xml
-cp javaee-cafe/target/javaee-cafe.war ./build
+mvn clean install --file pom.xml
+cp target/javaee-cafe.war ./build
 
 docker rmi ${imageName}
 docker build -t ${imageName} --build-arg keyStoreName=${keyStoreName} --build-arg keyStorePassword=${keyStorePassword} -f ./build/Dockerfile-k8s ./build

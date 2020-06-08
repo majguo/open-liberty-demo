@@ -5,8 +5,8 @@ crServer=$1
 # Name and optionally a tag in the 'name:tag' format
 imageName=$2
 
-mvn clean install --file javaee-cafe/pom.xml
-cp javaee-cafe/target/javaee-cafe.war ./build
+mvn clean install --file pom.xml
+cp target/javaee-cafe.war ./build
 
 docker rmi ${imageName}
 docker build -t ${imageName} -f ./build/Dockerfile-openshift ./build
