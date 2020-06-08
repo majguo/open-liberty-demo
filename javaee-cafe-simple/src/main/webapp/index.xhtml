@@ -54,11 +54,12 @@
 					<h:outputText value="#{messages.name} " />
 					<h:inputText id="name" value="#{cafe.name}"
 						styleClass="form-control" />
-					<p />
 					<h:message for="name" style="color:red" />
 					<p />
 					<h:outputText value="#{messages.price} " />
-					<fc:inputPrice id="price" price="#{cafe.price}" />
+					<h:inputText id="price" value="#{cafe.price}"
+						styleClass="form-control" converterId="javax.faces.Double" />
+					<h:message for="price" style="color:red" />
 					<p />
 					<h:commandButton value="#{messages.submit}"
 						action="#{cafe.addCoffee}" styleClass="btn btn-default" />

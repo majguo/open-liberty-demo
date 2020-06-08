@@ -64,9 +64,6 @@
                 </configuration>
               </execution>
             </executions>
-            <configuration>
-              <include>runnable</include>
-            </configuration>
           </plugin>         
         </plugins>
       </build>
