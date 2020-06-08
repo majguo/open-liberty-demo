@@ -1,0 +1,9 @@
+apiVersion: openliberty.io/v1beta1
+kind: OpenLibertyApplication
+metadata:
+  name: javaee-cafe-simple
+spec:
+  replicas: 1
+  applicationImage: ${APPLICATION_IMAGE}
+  pullPolicy: Always
+  expose: true
