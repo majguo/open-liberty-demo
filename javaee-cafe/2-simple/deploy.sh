@@ -1,9 +1,9 @@
 #!/bin/sh
 
 export APPLICATION_IMAGE=${1}
-NAMESPACE=open-liberty-demo
+export NAMESPACE=open-liberty-demo
 
 oc new-project ${NAMESPACE}
 
-envsubst < openlibertyapplication-openshift.yaml | oc apply -n ${NAMESPACE} -f -
+envsubst < openlibertyapplication.yaml | oc apply -f -
 echo "The application is succesfully deployed to project ${NAMESPACE}!"

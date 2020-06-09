@@ -2,6 +2,7 @@ apiVersion: openliberty.io/v1beta1
 kind: OpenLibertyApplication
 metadata:
   name: javaee-cafe-simple
+  namespace: ${NAMESPACE}
 spec:
   replicas: 1
   applicationImage: ${APPLICATION_IMAGE}
