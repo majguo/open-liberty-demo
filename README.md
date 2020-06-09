@@ -54,7 +54,7 @@ Navigate to [`<path-to-repo>/javaee-cafe/1-start`](https://github.com/majguo/ope
 Follow the steps below to package and deploy the application to your desired Java EE Application Server
 - Run `mvn clean package`, which will generate a war package `javaee-cafe.war` under `./target`
 - Deploy `./target/javaee-cafe.war` to one Java EE Application Server per its specific steps
-- Visit the application in your browser. Below is the screenshot of application home page which was deployed to WebSphere Applicatoin Server:
+- Visit the application in your browser. Below is the screenshot of application home page:
 ![javaee-cafe-web-ui](pictures/javaee-cafe-web-ui.png)
 
 ### Configure app to run on Open Liberty server
