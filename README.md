@@ -1,7 +1,7 @@
 # Deploy Open Liberty Application on Azure Red Hat OpenShift
+This guide demonstrates how to run your Java EE application on Open Liberty runtime and then deploy the containerized applicatoin to Azure Red Hat OpenShift (ARO) cluster using Open Liberty Operator. After going through this guide, you will learn steps about preparing Open Liberty Application, building application image & running containerzed application on ARO.
 - Introduction for Open Liberty
 - Introduction for Azure Red Hat OpenShift
-- This guide is for how to deploy and run Open Liberty application on ARO
 
 ## Prerequisites
 - Install JDK per your needs (e.g., [AdoptOpenJDK OpenJDK 8 LTS/HotSpot](https://adoptopenjdk.net))
@@ -18,9 +18,9 @@
 ## Prepare your Open Liberty application
 - Start with [MicroProfile Starter](https://start.microprofile.io/)
 - Setup [server configuration](https://openliberty.io/docs/ref/config/)
-- Build application image with [Open Liberty container images](https://github.com/OpenLiberty/ci.docker)
 
 ## Deploy application on ARO
+- Build application image with [Open Liberty container images](https://github.com/OpenLiberty/ci.docker)
 - OpenLibertyApplication yaml
 - Deploy from GUI
 - Deploy from CLI
