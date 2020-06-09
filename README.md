@@ -62,26 +62,26 @@ In order to run the application on Open Liberty server, the only mandatory step 
 ```
 <?xml version="1.0" encoding="UTF-8"?>
 <server description="defaultServer">
-	<!-- Enable features -->
-	<featureManager>
-		<feature>cdi-2.0</feature>
+    <!-- Enable features -->
+    <featureManager>
+        <feature>cdi-2.0</feature>
         <feature>jaxb-2.2</feature>
         <feature>jsf-2.3</feature>
         <feature>jaxrs-2.1</feature>
         <feature>ejbLite-3.2</feature>
-	</featureManager>
+    </featureManager>
 
-	<!-- Define http & https endpoints -->
-	<httpEndpoint id="defaultHttpEndpoint" host="*"
-		httpPort="9080" httpsPort="9443" />
+    <!-- Define http & https endpoints -->
+    <httpEndpoint id="defaultHttpEndpoint" host="*"
+        httpPort="9080" httpsPort="9443" />
 
-	<!-- Automatically expand WAR files and EAR files -->
-	<applicationManager autoExpand="true" />
+    <!-- Automatically expand WAR files and EAR files -->
+    <applicationManager autoExpand="true" />
 
-	<!-- Define web application with its context root and location -->
-	<webApplication id="javaee-cafe" contextRoot="/"
-		location="${server.config.dir}/apps/javaee-cafe.war">
-	</webApplication>
+    <!-- Define web application with its context root and location -->
+    <webApplication id="javaee-cafe" contextRoot="/"
+        location="${server.config.dir}/apps/javaee-cafe.war">
+    </webApplication>
 </server>
 ```
 It's recommended to add this configuration file to `<path-to-repo>/javaee-cafe/1-start/src/main/liberty/config` (create directories if they don't exist before), as it can perfectly work with `liberty-maven-plugin` which makes develop Open Liberty applicatoin easy.
