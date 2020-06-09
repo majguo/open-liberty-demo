@@ -57,8 +57,36 @@ Follow the steps below to package and deploy the application to your desired Jav
 - Visit the application in your browser. Below is the screenshot of application home page which was deployed to WebSphere Applicatoin Server:
 ![javaee-cafe-web-ui](pictures/javaee-cafe-web-ui.png)
 
-### Setup Open Liberty configuration
-- Setup [server configuration](https://openliberty.io/docs/ref/config/)
+### Configure to run on Open Liberty server
+In order to run the application on Open Liberty server, the only mandatory step is to add a server configuratoin file `server.xml`:
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<server description="defaultServer">
+	<!-- Enable features -->
+	<featureManager>
+		<feature>cdi-2.0</feature>
+        <feature>jaxb-2.2</feature>
+        <feature>jsf-2.3</feature>
+        <feature>jaxrs-2.1</feature>
+        <feature>ejbLite-3.2</feature>
+	</featureManager>
+
+	<!-- Define http & https endpoints -->
+	<httpEndpoint id="defaultHttpEndpoint" host="*"
+		httpPort="9080" httpsPort="9443" />
+
+	<!-- Automatically expand WAR files and EAR files -->
+	<applicationManager autoExpand="true" />
+
+	<!-- Define web application with its context root and location -->
+	<webApplication id="javaee-cafe" contextRoot="/"
+		location="${server.config.dir}/apps/javaee-cafe.war">
+	</webApplication>
+</server>
+```
+It's recommended to add this configuration file to `<path-to-repo>/javaee-cafe/1-start/src/main/liberty/config` (create directories if they don't exist before), as it can perfectly work with `liberty-maven-plugin` which makes develop Open Liberty applicatoin easy.
+
+TODO: add `liberty-maven-plugin` to pom.xml
 
 ## Deploy application on ARO
 - Build application image with [Open Liberty container images](https://github.com/OpenLiberty/ci.docker)
@@ -72,3 +100,6 @@ Follow the steps below to package and deploy the application to your desired Jav
 ### Persist data with Azure Database for PostgreSQL
 
 ### Ship application log to managed Elasticsearch service on Azure
+
+## References
+- [Open Liberty server configuration](https://openliberty.io/docs/ref/config/)
