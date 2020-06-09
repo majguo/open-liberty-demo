@@ -20,7 +20,7 @@ This guide demonstrates how to run your Java EE application on Open Liberty runt
 In case you already have a Java EE applicatoin running on Java EE Application Server (e.g., WebSphere, WebLogic, JBoss, etc.), it's easy to make it run on Open Liberty server with minimum changes.
 
 ### A basic Java EE app for quick start
-Navigate to `<path-to-repo>/javaee-cafe/1-start` to find out the sample app we prepared for your quick start. It's a basic Java EE application and simple CRUD application. It uses Maven and Java EE 8 (JAX-RS, EJB, CDI, JSON-B, JSF, Bean Validation). Here is brief introduction for the project structure:
+Navigate to [`<path-to-repo>/javaee-cafe/1-start`](https://github.com/majguo/open-liberty-demo/tree/master/javaee-cafe/1-start) of your local clone and find out the sample app we prepared for your quick start. It's a basic Java EE application and simple CRUD application. It uses Maven and Java EE 8 (JAX-RS, EJB, CDI, JSON-B, JSF, Bean Validation). Here is brief introduction for the project structure:
 ```
 ├── pom.xml                                         # Maven POM file
 └── src
@@ -48,7 +48,7 @@ Navigate to `<path-to-repo>/javaee-cafe/1-start` to find out the sample app we p
     │       │   └── web.xml                         # Deployment descriptor for a Servlet-based Java web application
     │       └── index.xhtml                         # Home page of JSF client
     └── test
-        └── java                                    # placeholder for tests
+        └── java                                    # Placeholder for tests
 ```
 
 Follow the steps below to package and deploy the application to your desired Java EE Application Server
