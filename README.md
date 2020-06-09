@@ -57,7 +57,7 @@ Follow the steps below to package and deploy the application to your desired Jav
 - Visit the application in your browser. Below is the screenshot of application home page which was deployed to WebSphere Applicatoin Server:
 ![javaee-cafe-web-ui](pictures/javaee-cafe-web-ui.png)
 
-### Configure to run on Open Liberty server
+### Configure app to run on Open Liberty server
 In order to run the application on Open Liberty server, the only mandatory step is to add a server configuratoin file `server.xml`:
 ```
 <?xml version="1.0" encoding="UTF-8"?>
