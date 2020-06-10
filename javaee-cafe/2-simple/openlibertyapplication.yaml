@@ -5,6 +5,6 @@ metadata:
   namespace: open-liberty-demo
 spec:
   replicas: 1
-  # Note: replace "<Your_DockerHub_Account>" with your Docker Hub account name
-  applicationImage: docker.io/<Your_DockerHub_Account>/javaee-cafe-simple:latest
+  # Note: replace "${Your_DockerHub_Account}" with your Docker Hub account name
+  applicationImage: docker.io/${Your_DockerHub_Account}/javaee-cafe-simple:latest
   expose: true

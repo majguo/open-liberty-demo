@@ -7,6 +7,7 @@ This guide demonstrates how to run your Java EE application on Open Liberty runt
 - Install JDK per your needs (e.g., [AdoptOpenJDK OpenJDK 8 LTS/OpenJ9](https://adoptopenjdk.net/?variant=openjdk8&jvmVariant=openj9))
 - Install [Maven](https://maven.apache.org/download.cgi)
 - Install [Docker](https://docs.docker.com/get-docker/) for your OS
+- Register a [Docker Hub](https://id.docker.com/) account
 - Install [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest)
 - Register an Azure subscription. If you don't have one, you can get one for free for one year [here](https://azure.microsoft.com/en-us/free)
 - Clone this repo to your local directory
@@ -183,15 +184,15 @@ mvn clean package
 docker build -t javaee-cafe-simple --pull .
 
 # Create a new tag with your Docker Hub account info that refers to source image
-# Note: replace "<Your_DockerHub_Account>" with your valid Docker Hub account name
-docker tag javaee-cafe-simple docker.io/<Your_DockerHub_Account>/javaee-cafe-simple
+# Note: replace "${Your_DockerHub_Account}" with your valid Docker Hub account name
+docker tag javaee-cafe-simple docker.io/${Your_DockerHub_Account}/javaee-cafe-simple
 
 # Login to Docker Hub
 docker login
 
 # Push image to your Docker Hub repositories
-# Note: replace "<Your_DockerHub_Account>" with your valid Docker Hub account name
-docker push docker.io/<Your_DockerHub_Account>/javaee-cafe-simple
+# Note: replace "${Your_DockerHub_Account}" with your valid Docker Hub account name
+docker push docker.io/${Your_DockerHub_Account}/javaee-cafe-simple
 ```
 
 ### Prepare OpenLibertyApplication yaml file
@@ -205,8 +206,8 @@ metadata:
   namespace: open-liberty-demo
 spec:
   replicas: 1
-  # Note: replace "<Your_DockerHub_Account>" with your valid Docker Hub account name
-  applicationImage: docker.io/<Your_DockerHub_Account>/javaee-cafe-simple:latest
+  # Note: replace "${Your_DockerHub_Account}" with your valid Docker Hub account name
+  applicationImage: docker.io/${Your_DockerHub_Account}/javaee-cafe-simple:latest
   expose: true
 ```
 
@@ -228,20 +229,38 @@ It's time to deploy the sample Open Liberty Application to Azure Red Hat OpenShi
     namespace: open-liberty-demo
   spec:
     replicas: 1
-    # Note: replace "<Your_DockerHub_Account>" with your valid Docker Hub account name
-    applicationImage: docker.io/<Your_DockerHub_Account>/javaee-cafe-simple
+    # Note: replace "${Your_DockerHub_Account}" with your valid Docker Hub account name
+    applicationImage: docker.io/${Your_DockerHub_Account}/javaee-cafe-simple
     expose: true
   ```
 - Navigate to "javaee-cafe-simple > Resources > javaee-cafe-simple (Route) > Click link below Location"
 - You will see the same application home page opened in the browser, which was mentioned before
 
 ### Deploy from CLI
-You can login to OpenShift cluster via CLI with token retrieved from its web console:
+You can also login to OpenShift cluster via CLI with token retrieved from its web console:
 - At right-top of web console, expand context menu of logged-in user (e.g. "kube:admin"), then click "Copy Login Command"
 - Login into the new tab window if required
 - Click "Display Token" > Copy value listed below "Log in with this token" > Paste and run the copied command in a console  
 
+Make sure you changed working directory to [`<path-to-repo>/javaee-cafe/2-simple`](https://github.com/majguo/open-liberty-demo/tree/master/javaee-cafe/2-simple), run the following commands to deploy your Open Liberty Application to ARO cluster:
+```
+# Create new namespace where resources of demo app will belong to
+oc new-project open-liberty-demo
 
+# Create an ENV variable which will subsitute the one defined in openlibertyapplication.yaml
+# Note: replace "<Your_DockerHub_Account>" with your valid Docker Hub account name
+export Your_DockerHub_Account=<Your_DockerHub_Account>
+
+# Subsitute "Your_DockerHub_Account" in openlibertyapplication.yaml and then create resource
+envsubst < openlibertyapplication.yaml | oc apply -f -
+
+# Check if OpenLibertyApplication instance created
+oc get openlibertyapplication -n open-liberty-demo
+
+# Check if route created by Operator
+oc get route -n open-liberty-demo
+```
+Once the route of Open Liberty Application is created, you can visit the application home page by opening the URL copied from value of its "HOST/PORT" in your browser.
 
 ## Integrate with Azure services
 ### Enable Signle-Sign-On with Azure Active Directory OpenID Connect
@@ -254,3 +273,4 @@ You can login to OpenShift cluster via CLI with token retrieved from its web con
 - [Open Liberty Operator](https://github.com/OpenLiberty/open-liberty-operator)
 - [Open Liberty server configuration](https://openliberty.io/docs/ref/config/)
 - [Liberty Maven Plugin](https://github.com/OpenLiberty/ci.maven#liberty-maven-plugin)
+- [Open Liberty Container Images](https://github.com/OpenLiberty/ci.docker)
