@@ -59,7 +59,7 @@
                 </goals>
                 <configuration>
                   <libertyRuntimeVersion>[20.0.0.1,)</libertyRuntimeVersion>
-                  <outputDirectory>target/wlp-package</outputDirectory>
+                  <outputDirectory>${project.build.directory}/wlp-package</outputDirectory>
                 </configuration>
               </execution>
             </executions>
