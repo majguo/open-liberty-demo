@@ -31,5 +31,7 @@ target
 *.jks
 
 hello-world/*
-deploy/ca.crt
-deploy/ca.key
+javaee-cafe/2-simple/build.sh
+javaee-cafe/2-simple/deploy.sh
+javaee-cafe/3-integration/deploy/ca.crt
+javaee-cafe/3-integration/deploy/ca.key
