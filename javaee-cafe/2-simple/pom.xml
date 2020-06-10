@@ -17,8 +17,6 @@
     <maven.compiler.target>1.8</maven.compiler.target>
     <maven.compiler.source>1.8</maven.compiler.source>
     <failOnMissingWebXml>false</failOnMissingWebXml>
-    <openliberty.version>[20.0.0.1,)</openliberty.version>
-    <openliberty.maven.version>3.2</openliberty.maven.version>
   </properties>
   <dependencies>
     <dependency>
@@ -48,7 +46,7 @@
           <plugin>
             <groupId>io.openliberty.tools</groupId>
             <artifactId>liberty-maven-plugin</artifactId>
-            <version>${openliberty.maven.version}</version>
+            <version>3.2</version>
             <executions>
               <execution>
                 <id>package-server</id>
@@ -60,6 +58,7 @@
                   <goal>package</goal>
                 </goals>
                 <configuration>
+                  <libertyRuntimeVersion>[20.0.0.1,)</libertyRuntimeVersion>
                   <outputDirectory>target/wlp-package</outputDirectory>
                 </configuration>
               </execution>
