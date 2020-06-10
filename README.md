@@ -277,6 +277,6 @@ Once the route of Open Liberty Application is created, you can visit the applica
 - [Open Liberty](https://openliberty.io/)
 - [Azure Red Hat OpenShift](https://azure.microsoft.com/en-us/services/openshift/)
 - [Open Liberty Operator](https://github.com/OpenLiberty/open-liberty-operator)
-- [Open Liberty server configuration](https://openliberty.io/docs/ref/config/)
+- [Open Liberty Server Configuration](https://openliberty.io/docs/ref/config/)
 - [Liberty Maven Plugin](https://github.com/OpenLiberty/ci.maven#liberty-maven-plugin)
 - [Open Liberty Container Images](https://github.com/OpenLiberty/ci.docker)
