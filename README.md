@@ -153,7 +153,7 @@ defaultServer server is ready to run a smarter planet. The defaultServer server 
 [INFO] Press the Enter key to run tests on demand. To stop the server and quit dev mode, use Ctrl-C or type 'q' and press the Enter key.
 [INFO] Source compilation was successful.
 ```
-Open http://localhost:9080/ in your browser, you will see the application home page mentioned before.
+Open http://localhost:9080/ in your browser to visit the application home page mentioned before.
 
 You can also find out all of thsee changes from [`<path-to-repo>/javaee-cafe/2-simple`](https://github.com/majguo/open-liberty-demo/tree/master/javaee-cafe/2-simple). Check it out for your reference.
 
