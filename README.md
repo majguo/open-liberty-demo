@@ -58,7 +58,7 @@ Follow the steps below to package and deploy the application to your desired Jav
 ![javaee-cafe-web-ui](pictures/javaee-cafe-web-ui.png)
 
 ### Configure app to run on Open Liberty server
-In order to run the application on Open Liberty server, the only mandatory step is to add a server configuratoin file `server.xml`:
+In order to run the application on Open Liberty server, the only mandatory step is to add a server configuratoin file `server.xml` with required settings:
 ```
 <?xml version="1.0" encoding="UTF-8"?>
 <server description="defaultServer">
@@ -84,9 +84,78 @@ In order to run the application on Open Liberty server, the only mandatory step 
     </webApplication>
 </server>
 ```
-It's recommended to add this configuration file to `<path-to-repo>/javaee-cafe/1-start/src/main/liberty/config` (create directories if they don't exist before), as it can perfectly work with `liberty-maven-plugin` which makes develop Open Liberty applicatoin easy.
+It's recommended to add this configuration file to `<path-to-repo>/javaee-cafe/1-start/src/main/liberty/config` (remember create directories that don't exist before), as it can perfectly work with `liberty-maven-plugin` which makes develop Open Liberty applicatoin easy.
 
-TODO: add `liberty-maven-plugin` to pom.xml
+Although it's not mandatory to use [liberty-maven-plugin](https://github.com/OpenLiberty/ci.maven#liberty-maven-plugin), it's recommended to use as it provides a number of goals for managing a Liberty server and applications. One of the most exciting features is "Dev Mode" which was supported since release 3.0. There is a new `dev` goal that starts a Liberty server in dev mode. Dev mode provides three key features:
+- Code changes are detected, recompiled, and picked up by your running server.
+- Unit and integration tests are run on demand when you press Enter in the command terminal where dev mode is running, or optionally on every code change to give you instant feedback on the status of your code. 
+- Finally, it allows you to attach a debugger to the running server at any time to step through your code.
+
+To enable Liberty Maven Plugin in your project, add the followings to `<path-to-repo>/javaee-cafe/1-start/pom.xml`:
+```
+<project>
+
+  <!-- Beginning of configuration to be added -->
+  <profiles>
+    <profile>
+      <id>liberty</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <build>
+        <plugins>
+          <!-- Enable liberty-maven-plugin -->
+          <plugin>
+            <groupId>io.openliberty.tools</groupId>
+            <artifactId>liberty-maven-plugin</artifactId>
+            <version>3.2</version>
+            <executions>
+              <execution>
+                <id>package-server</id>
+                <phase>package</phase>
+                <goals>
+                  <goal>create</goal>
+                  <goal>install-feature</goal>
+                  <goal>deploy</goal>
+                  <goal>package</goal>
+                </goals>
+                <configuration>
+                  <libertyRuntimeVersion>[20.0.0.1,)</libertyRuntimeVersion>
+                  <outputDirectory>${project.build.directory}/wlp-package</outputDirectory>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>         
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+  <!-- End of configuration to be added -->
+
+</project>
+```
+
+Now you can start "Dev Mode" by running command `mvn clean liberty:dev` in a console, wait until the server starts. You will see the similar info printed in your console as below:
+```
+[INFO] Listening for transport dt_socket at address: 7777
+[INFO] Launching defaultServer (Open Liberty 20.0.0.6/wlp-1.0.41.cl200620200528-0414) on Java HotSpot(TM) 64-Bit Server VM, version 1.8.0_251-b08 (en_US)
+[INFO] [AUDIT   ] CWWKE0001I: The server defaultServer has been launched.
+[INFO] [AUDIT   ] CWWKG0093A: Processing configuration drop-ins resource: 
+[INFO]   Property location will be set to ${server.config.dir}/apps/javaee-cafe.war.
+[INFO] 
+[INFO] [AUDIT   ] CWWKZ0058I: Monitoring dropins for applications.
+[INFO] [AUDIT   ] CWWKT0016I: Web application available (default_host): http://localhost:9080/
+[INFO] [AUDIT   ] CWWKZ0001I: Application javaee-cafe started in 3.453 seconds.
+[INFO] [AUDIT   ] CWWKF0012I: The server installed the following features: [cdi-2.0, ejbLite-3.2, el-3.0, jaxb-2.2, jaxrs-2.1, jaxrsClient-2.1, jndi-1.0, jsf-2.3, jsonp-1.1, jsp-2.3, servlet-4.0].
+[INFO] [AUDIT   ] CWWKF0011I: The defaultServer server is ready to run a smarter planet. The defaultServer server started in 6.447 seconds.
+[INFO] CWWKM2015I: Match number: 1 is [6/10/20 10:26:09:517 CST] 00000022 com.ibm.ws.kernel.feature.internal.FeatureManager            A CWWKF0011I: The 
+defaultServer server is ready to run a smarter planet. The defaultServer server started in 6.447 seconds..
+[INFO] Press the Enter key to run tests on demand. To stop the server and quit dev mode, use Ctrl-C or type 'q' and press the Enter key.
+[INFO] Source compilation was successful.
+```
+Open http://localhost:9080/ in your browser, you will see the application home page mentioned before.
+
+You can also find out all of thsee changes from [`<path-to-repo>/javaee-cafe/2-simple`](https://github.com/majguo/open-liberty-demo/tree/master/javaee-cafe/2-simple). Check it out for your reference.
 
 ## Deploy application on ARO
 - Build application image with [Open Liberty container images](https://github.com/OpenLiberty/ci.docker)

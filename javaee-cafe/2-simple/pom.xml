@@ -43,6 +43,7 @@
       </activation>
       <build>
         <plugins>
+          <!-- Enable liberty-maven-plugin -->
           <plugin>
             <groupId>io.openliberty.tools</groupId>
             <artifactId>liberty-maven-plugin</artifactId>
