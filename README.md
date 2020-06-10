@@ -155,7 +155,7 @@ defaultServer server is ready to run a smarter planet. The defaultServer server 
 ```
 Open http://localhost:9080/ in your browser to visit the application home page mentioned before.
 
-You can also find out all of thsee changes from [`<path-to-repo>/javaee-cafe/2-simple`](https://github.com/majguo/open-liberty-demo/tree/master/javaee-cafe/2-simple). Check it out for your reference.
+You can also find out all of these changes from [`<path-to-repo>/javaee-cafe/2-simple`](https://github.com/majguo/open-liberty-demo/tree/master/javaee-cafe/2-simple). Check it out for your reference if needed.
 
 ## Deploy application on ARO
 - Build application image with [Open Liberty container images](https://github.com/OpenLiberty/ci.docker)
