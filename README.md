@@ -1,7 +1,7 @@
 # Deploy Open Liberty Application on Azure Red Hat OpenShift
 This guide demonstrates how to run your Java EE application on Open Liberty runtime and then deploy the containerized applicatoin to Azure Red Hat OpenShift (ARO) cluster using Open Liberty Operator. After going through this guide, you will learn steps about preparing Open Liberty Application, building application image & running containerzed application on ARO.
-- Introduction for Open Liberty
-- Introduction for Azure Red Hat OpenShift
+- Introduction for [Open Liberty](https://openliberty.io/): Open Liberty is an IBM Open Source project which implementes Eclipse MicroProfile specifications and is also Jakarta EE compatibale. Open Liberty is fast to start up with a low memory footprint and live reload for quick iteration. Simple to add and remove features from the latest versions of MicroProfile and Jakarta EE. Zero migration lets you focus on what's important, not the APIs changing under you. 
+- Introduction for [Azure Red Hat OpenShift](https://azure.microsoft.com/en-us/services/openshift/): Azure Red Hat OpenShift provides a flexible, self-service deployment of fully managed OpenShift clusters. Maintain regulatory compliance and focus on your application development, while your master, infrastructure, and application nodes are patched, updated, and monitored by both Microsoft and Red Hat.
 
 ## Prerequisites
 - Install JDK per your needs (e.g., [AdoptOpenJDK OpenJDK 8 LTS/OpenJ9](https://adoptopenjdk.net/?variant=openjdk8&jvmVariant=openj9))
@@ -15,7 +15,11 @@ This guide demonstrates how to run your Java EE application on Open Liberty runt
 ## Set up Azure Red Hat OpenShift cluster
 - [Create an Azure Red Hat OpenShift 4 cluster](https://docs.microsoft.com/en-us/azure/openshift/tutorial-create-cluster)
 - [Connect to an Azure Red Hat OpenShift 4 cluster](https://docs.microsoft.com/en-us/azure/openshift/tutorial-connect-cluster)
-- Install Open Liberty Operator
+- Install Open Liberty Operator:
+  - Login into OpenShift web console from your browser
+  - Navigate to "Operators > OperatorHub", search "Open Liberty Operator", click "Open Liberty Operator" from search results, click "Install"
+    ![install-operator](pictures/install-operator.png)
+  - Click "Subscribe" and wait until "Open Liberty Operator" is listed as one of Installed Operators
 
 ## Prepare your Open Liberty application
 In case you already have a Java EE applicatoin running on Java EE Application Server (e.g., WebSphere, WebLogic, JBoss, etc.), it's easy to make it run on Open Liberty server with minimum changes.
@@ -270,6 +274,8 @@ Once the route of Open Liberty Application is created, you can visit the applica
 ### Ship application log to managed Elasticsearch service on Azure
 
 ## References
+- [Open Liberty](https://openliberty.io/)
+- [Azure Red Hat OpenShift](https://azure.microsoft.com/en-us/services/openshift/)
 - [Open Liberty Operator](https://github.com/OpenLiberty/open-liberty-operator)
 - [Open Liberty server configuration](https://openliberty.io/docs/ref/config/)
 - [Liberty Maven Plugin](https://github.com/OpenLiberty/ci.maven#liberty-maven-plugin)
