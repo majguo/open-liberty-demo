@@ -1,2 +1,3 @@
-# open-liberty-demo
-This is an Open Liberty demo project for demonstrating the integration with external services.
+# Open Liberty on Azure Kubernetes Service & Azure Red Hat OpenShift Demo
+
+Work in progress...
