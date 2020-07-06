@@ -30,6 +30,5 @@ target
 .classpath
 *.jks
 
-hello-world/*
-deploy/ca.crt
-deploy/ca.key
+*.crt
+*.key
