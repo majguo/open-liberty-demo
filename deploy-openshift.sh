@@ -1,36 +1,56 @@
 #!/bin/sh
 
-export APPLICATION_IMAGE=${1}
-export ELASTIC_CLOUD_ID=${2}
-export ELASTIC_CLOUD_AUTH=${3}:${4}
-CA_CRT_NAME=${5}
-CA_KEY_NAME=${6}
-export POSTGRESQL_SERVER_NAME=${7}
-export POSTGRESQL_USER=${8}
-export POSTGRESQL_PASSWORD=${9}
-export TENANT_ID=${10}
-export CLIENT_ID=${11}
-export CLIENT_SECRET=${12}
+# Environment variables
+export CONTAINER_REGISTRY=${1}
+export CLIENT_ID=${2}
+export CLIENT_SECRET=${3}
+export TENANT_ID=${4}
+export ADMIN_GROUP_ID=${5}
+export DB_SERVER_NAME=${6}
+export DB_PORT_NUMBER=${7}
+export DB_NAME=postgres
+export DB_USER=${8}
+export DB_PASSWORD=${9}
+export ELASTIC_CLOUD_ID=${10}
+export ELASTIC_CLOUD_AUTH=${11}
+
+# Create Namespace "open-liberty-demo"
 NAMESPACE=open-liberty-demo
-
 oc new-project ${NAMESPACE}
-oc create serviceaccount -n ${NAMESPACE} privileged-account
-oc adm policy add-scc-to-user privileged -n ${NAMESPACE} -z privileged-account
-export SERVICE_ACCOUNT_NAME=privileged-account
 
-# create secret including tls.crt & tls.key
-# note:
-# - namespace "cert-manager" must be created before when installing cert-manager operator
-# - "CA_CRT_NAME" for CA certificate & "CA_KEY_NAME" for CA private key must be generated ahead of time,
-#   e.g., "openssl req -x509 -sha256 -nodes -days 365 -newkey rsa:2048 -keyout ca.key -out ca.crt"
-oc create secret generic ca-secret --from-file=tls.crt=./deploy/${CA_CRT_NAME} --from-file=tls.key=./deploy/${CA_KEY_NAME} -n cert-manager
-export CA_SECRET_NAME=ca-secret
-export CLUSTER_ISSUER_NAME=openliberty-demo-ca
+# Create Secret "aad-oidc-secret"
+envsubst < deploy/aad-oidc-secret.yaml | oc create -f -
 
-envsubst < deploy/ca-clusterissuer.yaml | oc apply -n ${NAMESPACE} -f -
-envsubst < deploy/elastic-cloud-secret.yaml | oc apply -n ${NAMESPACE} -f -
-oc apply -n ${NAMESPACE} -f deploy/filebeat-elastic-hosted.yaml
-envsubst < deploy/postgresql-secret.yaml | oc apply -n ${NAMESPACE} -f -
-envsubst < deploy/aad-oidc-secret.yaml | oc apply -n ${NAMESPACE} -f -
-envsubst < deploy/openlibertyapplication-openshift.yaml | oc apply -n ${NAMESPACE} -f -
+# Create TLS private key and certificate, which is also used as CA certificate for testing purpose
+openssl req -x509 -sha256 -nodes -days 365 -newkey rsa:2048 -keyout tls.key -out tls.crt
+
+# Create Secret "tls-crt-secret"
+export CA_CRT=$(cat tls.crt | base64 -w 0)
+export DEST_CA_CRT=$(cat tls.crt | base64 -w 0)
+export TLS_CRT=$(cat tls.crt | base64 -w 0)
+export TLS_KEY=$(cat tls.key | base64 -w 0)
+envsubst < deploy/tls-crt-secret.yaml | oc create -f -
+
+# Create Secret "db-secret-postgres"
+envsubst < deploy/db-secret.yaml | oc create -f -
+
+# Determine whether hosted elasticsearch service is used
+if [ ! -z "$ELASTIC_CLOUD_ID" ] && [ ! -z "$ELASTIC_CLOUD_AUTH" ]; then
+    # Create ServiceAccount "filebeat-svc-account"
+    oc create -f deploy/filebeat-svc-account.yaml
+    oc adm policy add-scc-to-user privileged -n ${NAMESPACE} -z filebeat-svc-account
+
+    # Create ConfigMap "filebeat-config"
+    oc create -f deploy/filebeat-config.yaml
+
+    # Create Secret "elastic-cloud-secret"
+    envsubst < deploy/elastic-cloud-secret.yaml | oc create -f -
+    
+    # Create OpenLibertyApplication instance which connects to hosted elasticsearch service 
+    envsubst < deploy/ola-openshift-hosted-elasticsearch.yaml | oc create -f -
+else
+    # Create OpenLibertyApplication instance which connects to cluster logging of OpenShift
+    envsubst < deploy/ola-openshift-cluster-logging.yaml | oc create -f -
+fi
+
 echo "The application is succesfully deployed to project ${NAMESPACE}!"
