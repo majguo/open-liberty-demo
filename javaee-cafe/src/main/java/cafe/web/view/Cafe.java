@@ -38,8 +38,14 @@ public class Cafe implements Serializable {
 	private String baseUri;
 	private transient Client client;
 
-	@Inject
-	private transient SecurityContext securityContext;
+    @Inject
+    private transient SecurityContext securityContext;
+
+    @Inject
+    private transient CafeJwtUtil jwtUtil;
+
+    @Inject
+    private transient CafeRequestFilter filter;
 
 	@NotNull
 	@NotEmpty
@@ -68,9 +74,13 @@ public class Cafe implements Serializable {
 		return coffeeList;
 	}
 
-	public String getLoggedOnUser() {
-		return securityContext.getCallerPrincipal().getName();
-	}
+    public String getLoggedOnUser() {
+        return securityContext.getCallerPrincipal().getName();
+    }
+
+    public boolean isDisabledForDeletion() {
+        return !jwtUtil.isUserInAdminGroup();
+    }
 
 	@PostConstruct
 	private void init() {
@@ -87,7 +97,7 @@ public class Cafe implements Serializable {
 				public boolean verify(String hostname, SSLSession session) {
 					return true;
 				}
-			}).build();
+			}).build().register(filter);
 			this.getAllCoffees();
 		} catch (IllegalArgumentException | NullPointerException | WebApplicationException | UnknownHostException ex) {
 			logger.severe("Processing of HTTP response failed.");
