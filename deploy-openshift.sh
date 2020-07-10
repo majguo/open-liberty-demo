@@ -8,11 +8,11 @@ export TENANT_ID=${4}
 export ADMIN_GROUP_ID=${5}
 export DB_SERVER_NAME=${6}
 export DB_PORT_NUMBER=${7}
-export DB_NAME=postgres
-export DB_USER=${8}
-export DB_PASSWORD=${9}
-export ELASTIC_CLOUD_ID=${10}
-export ELASTIC_CLOUD_AUTH=${11}
+export DB_NAME=${8}
+export DB_USER=${9}
+export DB_PASSWORD=${10}
+export ELASTIC_CLOUD_ID=${11}
+export ELASTIC_CLOUD_AUTH=${12}
 
 # Create Namespace "open-liberty-demo"
 NAMESPACE=open-liberty-demo
