@@ -22,6 +22,35 @@ Follow tutorial [Quickstart: Deploy an Azure Kubernetes Service cluster using th
 * Connect to the cluster.
 * Install `kubectl` locally.
 
+### Install Open Liberty Operator on AKS
+
+[Open Liberty Operator](https://github.com/OpenLiberty/open-liberty-operator) now also supports Vanilla Kubernetes, including AKS. To install it on AKS cluster for managing your Open Liberty Application, follow the instructions from the [installation guide](https://github.com/OpenLiberty/open-liberty-operator/tree/master/deploy/releases/0.7.0) after creating and connecting to the AKS cluster:
+
+1. Install Custom Resource Definitions (CRDs) for OpenLibertyApplication.
+
+   ```bash
+   kubectl apply -f https://raw.githubusercontent.com/OpenLiberty/open-liberty-operator/master/deploy/releases/0.7.0/   openliberty-app-crd.yaml
+   ```
+
+2. Install cluster-level role-based access.
+
+   ```bash
+   OPERATOR_NAMESPACE=default
+   WATCH_NAMESPACE='""'
+
+   curl -L https://raw.githubusercontent.com/OpenLiberty/open-liberty-operator/master/deploy/releases/0.7.0/openliberty-app-cluster-rbac.yaml \
+      | sed -e "s/OPEN_LIBERTY_OPERATOR_NAMESPACE/${OPERATOR_NAMESPACE}/" \
+      | kubectl apply -f -
+   ```
+
+3. Install the operator.
+
+   ```bash
+   curl -L https://raw.githubusercontent.com/OpenLiberty/open-liberty-operator/master/deploy/releases/0.7.0/openliberty-app-operator.yaml \
+      | sed -e "s/OPEN_LIBERTY_WATCH_NAMESPACE/${WATCH_NAMESPACE}/" \
+      | kubectl apply -n ${OPERATOR_NAMESPACE} -f -
+   ```
+
 ## Set up Azure Red Hat OpenShift cluster
 
 Follow the instructions below to set up an ARO 4 cluster.
@@ -85,7 +114,7 @@ Azure Active Directory (Azure AD) implements OpenID Connect (OIDC), an authentic
 1. [Get an Azure AD tenant](https://docs.microsoft.com/azure/active-directory/develop/quickstart-create-new-tenant). It is very likely your Azure account already has a tenant. Note down your **tenant ID**.
 2. [Create a few Azure AD users](https://docs.microsoft.com/azure/active-directory/fundamentals/add-users-azure-active-directory). You can use these accounts or your own to test the application. Note down email addresses and passwords for login.
 3. Create an **admin group** to enable JWT (Json Web Token) RBAC (role-based-access-control) functionality. Follow [create a basic group and add members using Azure Active Directory](https://docs.microsoft.com/azure/active-directory/fundamentals/active-directory-groups-create-azure-portal) to create a group with type as **Security** and add one or more members. Note down the **group ID**.
-4. [Create a new application registration](https://docs.microsoft.com/azure/active-directory/develop/quickstart-register-app) in your Azure AD tenant. Specify **Redirect URI** to be [https://localhost:9443/oidcclient/redirect/liberty-aad-oidc-javaeecafe](https://localhost:9443/oidcclient/redirect/liberty-aad-oidc-javaeecafe). Note down the **client ID**.
+4. [Create a new application registration](https://docs.microsoft.com/azure/active-directory/develop/quickstart-register-app) in your Azure AD tenant. Specify **Redirect URI** to be [https://localhost:9443/ibm/api/social-login/redirect/liberty-aad-oidc-javaeecafe](https://localhost:9443/ibm/api/social-login/redirect/liberty-aad-oidc-javaeecafe). Note down the **client ID**.
    * **NOTE**: You need to come back later to add **Redirect URIs** after the sample application is deployed to the AKS cluster or ARO 4 cluster.
 5. Create a new client secret. In the newly created application registration, click **Certificates & secrets** > Select **New client secret** > Provide **a description** and hit **Add**. Note down the generated **client secret** value.
 6. Add a **groups claim** into the ID token. In the newly created application registration, click **Token configuration** > Click **Add groups claim** > Select **Security groups** as group types to include in the ID token > Expand **ID** and select **Group ID** in the **Customize token properties by type** section.
@@ -159,7 +188,7 @@ kubectl get service -n open-liberty-demo
 
 Once the Open Liberty Application is up and running, copy **CLUSTER-IP** of the service from console output.
 
-1. Open your **Azure AD** > **App registrations** > your **registered application** > **Authentication** > Click **Add URI** in **Redirect URIs** section > Input ***https://<copied_CLUSTER-IP_value>/oidcclient/redirect/liberty-aad-oidc-javaeecafe*** > Click **Save**.
+1. Open your **Azure AD** > **App registrations** > your **registered application** > **Authentication** > Click **Add URI** in **Redirect URIs** section > Input ***https://<copied_CLUSTER-IP_value>/ibm/api/social-login/redirect/liberty-aad-oidc-javaeecafe*** > Click **Save**.
 2. Open ***https://<copied_CLUSTER-IP_value>*** in the **InPrivate** window of **Microsoft Edge**, verify the application is secured by Azure AD OpenID Connect and connected to Azure Database for PostgreSQL server.
 
    1. Sign in as a user, who doesn't belong to the admin group you created before.
@@ -222,7 +251,7 @@ oc get route -n open-liberty-demo
 
 Once the Open Liberty Application is up and running, copy **HOST/PORT** of the service from console output.
 
-1. Open your **Azure AD** > **App registrations** > your **registered application** > **Authentication** > Click **Add URI** in **Redirect URIs** section > Input ***https://<copied_HOST/PORT _value>/oidcclient/redirect/liberty-aad-oidc-javaeecafe*** > Click **Save**.
+1. Open your **Azure AD** > **App registrations** > your **registered application** > **Authentication** > Click **Add URI** in **Redirect URIs** section > Input ***https://<copied_HOST/PORT _value>/ibm/api/social-login/redirect/liberty-aad-oidc-javaeecafe*** > Click **Save**.
 2. Open ***https://<copied_HOST/PORT _value>*** in the **InPrivate** window of **Microsoft Edge**, verify the application is secured by Azure AD OpenID Connect and connected to Azure Database for PostgreSQL server. Refer to the steps above on how to log in as user with different roles and create/delete coffees.
 
 The application logs are shipped to the Elasticsearch cluster, and they can be visualized in the Kinaba web console. Refer to the steps above to discover application logs from Kibaba.
@@ -249,7 +278,7 @@ oc get route -n open-liberty-demo
 
 Once the Open Liberty Application is up and running, copy **HOST/PORT** of the service from console output.
 
-1. Open your **Azure AD** > **App registrations** > your **registered application** > **Authentication** > Click **Add URI** in **Redirect URIs** section > Input ***https://<copied_HOST/PORT _value>/oidcclient/redirect/liberty-aad-oidc-javaeecafe*** > Click **Save**.
+1. Open your **Azure AD** > **App registrations** > your **registered application** > **Authentication** > Click **Add URI** in **Redirect URIs** section > Input ***https://<copied_HOST/PORT _value>/ibm/api/social-login/redirect/liberty-aad-oidc-javaeecafe*** > Click **Save**.
 2. Open ***https://<copied_HOST/PORT _value>*** in the **InPrivate** window of **Microsoft Edge**, verify the application is secured by Azure AD OpenID Connect and connected to Azure Database for PostgreSQL server. Refer to the steps above on how to log in as user with different roles and create/delete coffees.
 
 The application logs are shipped to the Elasticsearch cluster, and they can be visualized in the Kinaba web console.
@@ -269,7 +298,7 @@ The application logs are shipped to the Elasticsearch cluster, and they can be v
 * [Liberty Maven Plugin](https://github.com/OpenLiberty/ci.maven#liberty-maven-plugin)
 * [Open Liberty Container Images](https://github.com/OpenLiberty/ci.docker)
 * [Secure your application by using OpenID Connect and Azure AD](https://docs.microsoft.com/learn/modules/secure-app-with-oidc-and-azure-ad/)
-* [Configuring an OpenID Connect Client in Liberty](https://www.ibm.com/support/knowledgecenter/SSEQTP_liberty/com.ibm.websphere.wlp.doc/ae/twlp_config_oidc_rp.html)
+* [Configure social login as OpenID Connect client](https://www.ibm.com/support/knowledgecenter/SSEQTP_liberty/com.ibm.websphere.wlp.doc/ae/twlp_sec_sociallogin.html#twlp_sec_sociallogin__openid)
 * [Configuring the MicroProfile JSON Web Token](https://www.ibm.com/support/knowledgecenter/SSEQTP_liberty/com.ibm.websphere.wlp.doc/ae/twlp_sec_json.html)
 * [Configuring authorization for applications in Liberty](https://www.ibm.com/support/knowledgecenter/SSEQTP_liberty/com.ibm.websphere.wlp.doc/ae/twlp_sec_rolebased.html)
 * [Defines a data source configuration](https://openliberty.io/docs/ref/config/#dataSource.html)
