@@ -173,7 +173,10 @@ az aks get-credentials -g <resource-group-name> -n <cluster-name>
 cd <path-to-your-local-clone>
 
 # Run the script with all necessary arguments to deploy application
+# Deploy sample application using OpenLibertyApplication CR
 ./deploy-k8s.sh <your-container-registry> <client ID> <client secret> <tenant ID> <group ID> <Server name>.postgres.database.azure.com <Port number> postgres <Admin username>@<Server name> <DB_Password> <Cloud ID> <Elasticsearch_User name>:<Elasticsearch_Password>
+# Deploy sample application using K8S built-in resources
+# ./deploy-k8s.sh <your-container-registry> <client ID> <client secret> <tenant ID> <group ID> <Server name>.postgres.database.azure.com <Port number> postgres <Admin username>@<Server name> <DB_Password> <Cloud ID> <Elasticsearch_User name>:<Elasticsearch_Password> false
 
 # Check if deployment succeeded, until you see the console output similar as below
 kubectl get deployment -n open-liberty-demo
